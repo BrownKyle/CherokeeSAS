@@ -55,10 +55,10 @@ int main()
             //  display 10 times per second
 
             if ((now - displayTimer) > 100000) {
-                printf("Sample rate %d: %s\r", sampleRate, RTMath::displayDegrees("", imuData.fusionPose));
-                printf("Sample rate %d: %s\r", sampleRate, RTMath::displayDegrees("", imuData.gyro));
-                printf("Sample rate %d: %s\r", sampleRate, RTMath::displayDegrees("", imuData.accel));
-                printf("Sample rate %d: %s\r", sampleRate, RTMath::displayDegrees("", imuData.compass));
+                printf("Sample rate %d of Fusion : %s\r \n", sampleRate, RTMath::displayDegrees("", imuData.fusionPose));
+                printf("Sample rate %d of Gryro R: %s\r \n", sampleRate, RTMath::displayDegrees("", imuData.gyro));
+                printf("Sample rate %d of Acceler: %s\r \n", sampleRate, RTMath::displayDegrees("", imuData.accel));
+                printf("Sample rate %d of Compass: %f\r \n", sampleRate, imuData.compass.x());
                 fflush(stdout);
                 displayTimer = now;
             }

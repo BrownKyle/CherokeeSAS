@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pi/CherokeeSAS/ReadIMUTests/CommandLineIMU.cpp
+RTIMULib.h
+/home/pi/CherokeeSAS/ReadIMUTests/RTIMULib.h
+

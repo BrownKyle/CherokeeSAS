@@ -56,7 +56,7 @@ DEPS    = $(RTIMULIBPATH)/RTMath.h \
     $(RTIMULIBPATH)/IMUDrivers/RTPressureMS5611.h \
     $(RTIMULIBPATH)/IMUDrivers/RTPressureMS5637.h
 
-OBJECTS = objects/RTIMULibDrive.o \
+OBJECTS = objects/CommandLineIMU.o \
     objects/RTMath.o \
     objects/RTIMUHal.o \
     objects/RTFusion.o \
@@ -82,7 +82,7 @@ OBJECTS = objects/RTIMULibDrive.o \
     objects/RTPressureMS5611.o \
     objects/RTPressureMS5637.o
 
-MAKE_TARGET	= RTIMULibDrive
+MAKE_TARGET	= CommandLineIMU
 DESTDIR		= Output/
 TARGET		= Output/$(MAKE_TARGET)
 
@@ -104,9 +104,9 @@ $(OBJECTS_DIR)%.o : $(RTIMULIBPATH)/IMUDrivers/%.cpp $(DEPS)
 	@$(CHK_DIR_EXISTS) objects/ || $(MKDIR) objects/
 	$(CXX) -c -o $@ $< $(CFLAGS) $(INCPATH)
 
-$(OBJECTS_DIR)RTIMULibDrive.o : RTIMULibDrive.cpp $(DEPS)
+$(OBJECTS_DIR)CommandLineIMU.o : CommandLineIMU.cpp $(DEPS)
 	@$(CHK_DIR_EXISTS) objects/ || $(MKDIR) objects/
-	$(CXX) -c -o $@ RTIMULibDrive.cpp $(CFLAGS) $(INCPATH)
+	$(CXX) -c -o $@ CommandLineIMU.cpp $(CFLAGS) $(INCPATH)
 
 # Install
 install_target: FORCE
@@ -120,3 +120,4 @@ uninstall_target:  FORCE
 install:  install_target  FORCE
 uninstall: uninstall_target   FORCE
 FORCE:
+
