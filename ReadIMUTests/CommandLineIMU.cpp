@@ -55,10 +55,11 @@ int main()
             //  display 10 times per second
 
             if ((now - displayTimer) > 100000) {
-              printf("Observer Orientation Output. Roll: %d [deg] Pitch: %d [deg] Yaw: %d [deg]\n", (180/3.14)*imuData.fusionPose.x(),(180/3.14)*imuData.fusionPose.y(),(180/3.14)*imuData.fusionPose.y());
-              printf("Gryo Output. Roll Rate: %d [deg/s] Pitch Rate: %d [deg/s] Yaw Rate: %d [deg/s]\n", (180/3.14)*imuData.gyro.x(),(180/3.14)*imuData.gyro.y(),(180/3.14)*imuData.gyro.y());
-              printf("Accelerometer. X: %d [m/s^2] Y: %d [m/s^2] X: %d [m/s^2]\n", (9.81)*imuData.accel.x(),(9.81)*imuData.accel.y(),(9.81)*imuData.accel.y());
-              printf("Compass. Xmag: %d [uT] Ymag: %d [uT] X: %d [uT]\n", imuData.compass.x(),imuData.compass.y(),imuData.compass.y());
+              // for testing comment out unused lines and change \n for \r,
+              printf("Observer Orientation Output. Roll: %.2f [deg] Pitch: %.2f [deg] Yaw: %.2f [deg]\n", (180/3.14)*imuData.fusionPose.x(),(180/3.14)*imuData.fusionPose.y(),(180/3.14)*imuData.fusionPose.z());
+              printf("Gryo Output. Roll Rate: %.2f [deg/s] Pitch Rate: %.2f [deg/s] Yaw Rate: %.2f [deg/s]\n", (180/3.14)*imuData.gyro.x(),(180/3.14)*imuData.gyro.y(),(180/3.14)*imuData.gyro.z());
+              printf("Accelerometer. X: %.2f [m/s^2] Y: %.2f [m/s^2] X: %.2f [m/s^2]\n", (9.81)*imuData.accel.x(),(9.81)*imuData.accel.y(),(9.81)*imuData.accel.z());
+              printf("Compass. Xmag: %.2f [uT] Ymag: %.2f [uT] X: %.2f [uT]\n", imuData.compass.x(),imuData.compass.y(),imuData.compass.z());
               fflush(stdout);
               displayTimer = now;
             }
