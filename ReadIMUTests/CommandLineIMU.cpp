@@ -18,7 +18,7 @@ int main()
     RTIMU *imu = RTIMU::createIMU(settings);
 
     if ((imu == NULL) || (imu->IMUType() == RTIMU_TYPE_NULL)) {
-        printf("No IMU found\n");
+        printf("Canny find the IMU ya dafty.\n");
         exit(1);
     }
 
@@ -55,12 +55,12 @@ int main()
             //  display 10 times per second
 
             if ((now - displayTimer) > 100000) {
-                printf("Sample rate %d of Fusion : %s\r \n", sampleRate, RTMath::displayDegrees("", imuData.fusionPose));
-                printf("Sample rate %d of Gryro R: %s\r \n", sampleRate, RTMath::displayDegrees("", imuData.gyro));
-                printf("Sample rate %d of Acceler: %s\r \n", sampleRate, RTMath::displayDegrees("", imuData.accel));
-                printf("Sample rate %d of Compass: %f\r \n", sampleRate, imuData.compass.x());
-                fflush(stdout);
-                displayTimer = now;
+              printf("Observer Orientation Output. Roll: %d [deg] Pitch: %d [deg] Yaw: %d [deg]\n", (180/3.14)*imuData.fusionPose.x(),(180/3.14)*imuData.fusionPose.y(),(180/3.14)*imuData.fusionPose.y());
+              printf("Gryo Output. Roll Rate: %d [deg/s] Pitch Rate: %d [deg/s] Yaw Rate: %d [deg/s]\n", (180/3.14)*imuData.gyro.x(),(180/3.14)*imuData.gyro.y(),(180/3.14)*imuData.gyro.y());
+              printf("Accelerometer. X: %d [m/s^2] Y: %d [m/s^2] X: %d [m/s^2]\n", (9.81)*imuData.accel.x(),(9.81)*imuData.accel.y(),(9.81)*imuData.accel.y());
+              printf("Compass. Xmag: %d [uT] Ymag: %d [uT] X: %d [uT]\n", imuData.compass.x(),imuData.compass.y(),imuData.compass.y());
+              fflush(stdout);
+              displayTimer = now;
             }
 
             //  update rate every second
