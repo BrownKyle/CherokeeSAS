@@ -1,8 +1,11 @@
 
 SET(DRIVE_SRCS
-    CommandLineIMU.cpp)
+    CommandLineIMUS.cpp)
+    
+add_library (rpiServo.cpp)
+add_libary (rpiPWM1.cpp)
 
-ADD_EXECUTABLE(CommandLineIMU ${DRIVE_SRCS})
-TARGET_LINK_LIBRARIES(CommandLineIMU RTIMULib)
+ADD_EXECUTABLE(CommandLineIMUS ${DRIVE_SRCS})
+TARGET_LINK_LIBRARIES(CommandLineIMUS RTIMULib)
 
-INSTALL(TARGETS CommandLineIMU DESTINATION bin)
+INSTALL(TARGETS CommandLineIMUS DESTINATION bin)
