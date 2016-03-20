@@ -22,29 +22,24 @@ int main(int argc, char *argv[])
     imu->setCompassEnable(true);
 
     MainWindow window;
-    window.startTimer(40);
 
 
+    //  poll at the rate recommended by the IMU
 
-    while (1) {
-        //  poll at the rate recommended by the IMU
+    //usleep(imu->IMUGetPollInterval() * 1000);
+    RTIMU_DATA imuData = imu->getIMUData();
+    float GyroOut = imuData.gyro.x();
+    QString Gyro= QString::number(GyroOut);
 
-        usleep(imu->IMUGetPollInterval() * 1000);
+    QApplication a(argc, argv);
 
-        while (imu->IMURead()) {
-            RTIMU_DATA imuData = imu->getIMUData();
-            float GyroOut = imuData.gyro.x();
-            QString Gyro= QString::number(GyroOut);
+    //create the window
+    MainWindow w;
+    w.setName(Gyro);
+    w.show();
 
-            QApplication a(argc, argv);
+    //execture the application
+    window.startTimer(200);
+    return a.exec();
 
-            //create the window
-            MainWindow w;
-            w.setName(Gyro);
-            w.show();
-
-            //execture the application
-            return a.exec();
-        }
-    }
 }
