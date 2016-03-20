@@ -23,9 +23,6 @@ int main(int argc, char *argv[])
     imu->setAccelEnable(true);
     imu->setCompassEnable(true);
 
-    MainWindow window;
-
-
     //  poll at the rate recommended by the IMU
 
     //usleep(imu->IMUGetPollInterval() * 1000);
@@ -33,15 +30,12 @@ int main(int argc, char *argv[])
     float GyroOut = imuData.gyro.x();
     QString Gyro= QString::number(GyroOut);
 
-
-
     //create the window
     MainWindow w;
-    w.setName(Gyro);
     w.show();
 
     //execture the application
-    window.startTimer(200);
+    w.startTimer(200);
     return a.exec();
 
 }

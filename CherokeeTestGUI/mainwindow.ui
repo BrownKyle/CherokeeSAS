@@ -23,7 +23,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit"/>
+     <widget class="QLCDNumber" name="lcdNumber"/>
     </item>
    </layout>
   </widget>

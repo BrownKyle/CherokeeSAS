@@ -15,15 +15,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setName(const QString &name)
-{
-    ui->lineEdit->setText(name);
-}
-
-QString MainWindow::name() const
-{
-    return ui->lineEdit->text();
-}
 
 void MainWindow::timerEvent( QTimerEvent * )
 {
@@ -36,6 +27,6 @@ void MainWindow::timerEvent( QTimerEvent * )
 
     MainWindow window;
 
-    window.setName(Gyro);
+    ui->lcdNumber->display(Gyro);
     window.show();
 }
