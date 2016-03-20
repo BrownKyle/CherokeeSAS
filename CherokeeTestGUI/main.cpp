@@ -6,6 +6,8 @@
 
 int main(int argc, char *argv[])
 {
+    QApplication a(argc, argv);
+
     RTIMUSettings *settings = new RTIMUSettings("RTIMULib");
     RTIMU *imu = RTIMU::createIMU(settings);
 
@@ -31,7 +33,7 @@ int main(int argc, char *argv[])
     float GyroOut = imuData.gyro.x();
     QString Gyro= QString::number(GyroOut);
 
-    QApplication a(argc, argv);
+
 
     //create the window
     MainWindow w;
