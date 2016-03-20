@@ -18,6 +18,8 @@ public:
     void setName(const QString &name);
     QString name() const;
 
+    void timerEvent( QTimerEvent * );
+
 private:
     Ui::MainWindow *ui;
 };

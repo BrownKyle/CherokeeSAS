@@ -21,6 +21,9 @@ int main(int argc, char *argv[])
     imu->setAccelEnable(true);
     imu->setCompassEnable(true);
 
+    MainWindow window;
+    window.startTimer(40);
+
 
 
     while (1) {
