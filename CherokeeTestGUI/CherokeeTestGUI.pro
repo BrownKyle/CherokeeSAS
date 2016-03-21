@@ -40,7 +40,8 @@ SOURCES += main.cpp\
     RTIMUHal.cpp \
     RTIMUMagCal.cpp \
     RTIMUSettings.cpp \
-    RTMath.cpp
+    RTMath.cpp \
+    imuthread.cpp
 
 HEADERS  += mainwindow.h \
     RTMath.h \
@@ -75,6 +76,7 @@ HEADERS  += mainwindow.h \
     RTIMULib.h \
     RTIMULibDefs.h \
     RTIMUMagCal.h \
-    RTIMUSettings.h
+    RTIMUSettings.h \
+    imuthread.h
 
 FORMS    += mainwindow.ui
