@@ -79,11 +79,12 @@ void IMUThread::run()
                 printf("Finished Printing\n");
                 displayTimer = now;
                 printf("set displayTime equal to now");
-                //*pIn = imuData.fusionPose.z();
-                //if (pIn == (&samples[MAX_SAMPLES-1]))
-                //  pIn = samples;
-                //else
-                //  pIn++;
+                
+                *pIn = imuData.fusionPose.z();
+                if (pIn == (&samples[MAX_SAMPLES-1]))
+                  pIn = samples;
+                else
+                  pIn++;
 
            }
         }
