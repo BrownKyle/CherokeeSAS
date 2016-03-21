@@ -14,9 +14,6 @@ public:
 
 private:
 
-    float now;
-    float displayTimer;
-
     // data collected
     int *samples;
 

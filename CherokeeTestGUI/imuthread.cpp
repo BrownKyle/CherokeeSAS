@@ -14,6 +14,7 @@ IMUThread::IMUThread()
     pIn = samples;
     // pointer for outgoing data
     pOut = samples;
+
 }
 
 int IMUThread::getSample()
@@ -35,6 +36,9 @@ int IMUThread::hasSample()
 
 void IMUThread::run()
 {
+    uint64_t now;
+    uint64_t displayTimer;
+
     RTIMUSettings *settings = new RTIMUSettings("RTIMULib");
     RTIMU *imu = RTIMU::createIMU(settings);
 
@@ -50,7 +54,7 @@ void IMUThread::run()
     imu->setAccelEnable(true);
     imu->setCompassEnable(true);
 
-    displayTimer = 0;
+    displayTimer = RTMath::currentUSecsSinceEpoch();
 
     //  now just process data
 
@@ -72,15 +76,16 @@ void IMUThread::run()
                 printf("Gryo Output. Roll Rate: %.2f [deg/s] Pitch Rate: %.2f [deg/s] Yaw Rate: %.2f [deg/s]\n", (180/3.14)*imuData.gyro.x(),(180/3.14)*imuData.gyro.y(),(180/3.14)*imuData.gyro.z());
                 printf("Accelerometer. X: %.2f [m/s^2] Y: %.2f [m/s^2] X: %.2f [m/s^2]\n", (9.81)*imuData.accel.x(),(9.81)*imuData.accel.y(),(9.81)*imuData.accel.z());
                 printf("Compass. Xmag: %.2f [uT] Ymag: %.2f [uT] X: %.2f [uT]\n", imuData.compass.x(),imuData.compass.y(),imuData.compass.z());
-                fflush(stdout);
+                printf("Finished Printing\n");
                 displayTimer = now;
+                printf("set displayTime equal to now");
+                //*pIn = imuData.fusionPose.z();
+                //if (pIn == (&samples[MAX_SAMPLES-1]))
+                //  pIn = samples;
+                //else
+                //  pIn++;
 
-                *pIn = imuData.fusionPose.z();
-                if (pIn == (&samples[MAX_SAMPLES-1]))
-                  pIn = samples;
-                else
-                  pIn++;
-            }
+           }
         }
     }
 }
