@@ -28,5 +28,6 @@ void MainWindow::timerEvent( QTimerEvent * )
     IMUThread imuthread;
     value = imuthread.getSample();
     this->ui->lcdNumber->display(value);
+    printf("/n The value from the ring buffer: %d/n",value);
     window.show();
 }
