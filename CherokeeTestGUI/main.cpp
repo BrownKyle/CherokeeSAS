@@ -15,10 +15,14 @@ int main(int argc, char *argv[])
 
     //create the window
     MainWindow w;
+
+
     w.show();
 
+    //sleep(20);
+
     // Need to test getSample by uncommmenting this timer.
-    //w.startTimer(200);
+
 
     //while(1)
     //{
@@ -27,5 +31,7 @@ int main(int argc, char *argv[])
     //}
 
     return a.exec();
+    sleep(2);
+    w.startTimer(200);
 
 }
