@@ -2,7 +2,7 @@
 #include <QtCore>
 #include <QDebug>
 #include <RTIMULib.h>
-#include "assert.h"
+#include <assert.h>
 
 #define MAX_SAMPLES 65536
 
@@ -39,6 +39,11 @@ void IMUThread::run()
     uint64_t now;
     uint64_t displayTimer;
 
+    QMutex mutex;
+
+    // mutex prevents the CPU from stopping to work on another thread
+
+    mutex.lock(); // lock mutex for setup
     RTIMUSettings *settings = new RTIMUSettings("RTIMULib");
     RTIMU *imu = RTIMU::createIMU(settings);
 
@@ -54,6 +59,9 @@ void IMUThread::run()
     imu->setAccelEnable(true);
     imu->setCompassEnable(true);
 
+    //unlock mutex
+    mutex.unlock();
+
     displayTimer = RTMath::currentUSecsSinceEpoch();
 
     //  now just process data
@@ -64,9 +72,10 @@ void IMUThread::run()
         usleep(imu->IMUGetPollInterval() * 1000);
 
         while (imu->IMURead()) {
+            mutex.lock();
             RTIMU_DATA imuData = imu->getIMUData();
-
             now = RTMath::currentUSecsSinceEpoch();
+            mutex.unlock();
 
             //  display 10 times per second
 
@@ -79,12 +88,15 @@ void IMUThread::run()
                 printf("Finished Printing\n");
                 displayTimer = now;
                 printf("set displayTime equal to now");
-                
+
+
+                mutex.lock();
                 *pIn = imuData.fusionPose.z();
                 if (pIn == (&samples[MAX_SAMPLES-1]))
                   pIn = samples;
                 else
                   pIn++;
+                mutex.unlock();
 
            }
         }

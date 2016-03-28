@@ -22,6 +22,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    int value;
 };
 
 #endif // MAINWINDOW_H

@@ -17,8 +17,15 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    //execture the application
-    w.startTimer(200);
+    // Need to test getSample by uncommmenting this timer.
+    //w.startTimer(200);
+
+    //while(1)
+    //{
+     //  imuthread.getSample();
+     //  QThread::msleep(20);
+    //}
+
     return a.exec();
 
 }

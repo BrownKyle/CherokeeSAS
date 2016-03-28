@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
+
+    connect(ui->PitchCommand,SIGNAL(valueChanged(int)),ui->ElevatorOut,SLOT(setNum(int)));
+    connect(ui->RollCommand,SIGNAL(valueChanged(int)),ui->AileronOut,SLOT(setNum(int)));
+    connect(ui->YawRateCommand,SIGNAL(valueChanged(int)),ui->RudderOut,SLOT(setNum(int)));
 }
 
 
@@ -21,5 +25,8 @@ MainWindow::~MainWindow()
 void MainWindow::timerEvent( QTimerEvent * )
 {
     MainWindow window;
+    IMUThread imuthread;
+    value = imuthread.getSample();
+    this->ui->lcdNumber->display(value);
     window.show();
 }
