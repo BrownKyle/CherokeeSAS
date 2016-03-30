@@ -9,14 +9,14 @@
 IMUThread::IMUThread()
 {
     // set up ringbuffer
-    samples = new int[MAX_SAMPLES];
+    //samples = new int[MAX_SAMPLES];
     // pointer for incoming data
-    pIn = samples;
+    //pIn = samples;
     // pointer for outgoing data
-    pOut = samples;
+    //pOut = samples;
 
 }
-
+/*
 int IMUThread::getSample()
 {
   assert(pOut!=pIn);
@@ -33,6 +33,8 @@ int IMUThread::hasSample()
 {
   return (pOut!=pIn);
 }
+
+*/
 
 void IMUThread::run()
 {
@@ -86,15 +88,18 @@ void IMUThread::run()
                 printf("Accelerometer. X: %.2f [m/s^2] Y: %.2f [m/s^2] X: %.2f [m/s^2]\n", (9.81)*imuData.accel.x(),(9.81)*imuData.accel.y(),(9.81)*imuData.accel.z());
                 printf("Compass. Xmag: %.2f [uT] Ymag: %.2f [uT] X: %.2f [uT]\n", imuData.compass.x(),imuData.compass.y(),imuData.compass.z());
                 displayTimer = now;
+                //printf("The number from the struct: %f", TestStruct.number);
 
 
                 mutex.lock();
+                /*
                 *pIn = imuData.fusionPose.z();
                 if (pIn == (&samples[MAX_SAMPLES-1]))
                   pIn = samples;
                 else
                   pIn++;
                 mutex.unlock();
+                */
 
            }
         }

@@ -21,6 +21,7 @@
 #include <QtGui/QSlider>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -28,7 +29,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QWidget *widget;
+    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout_5;
     QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
@@ -48,31 +50,35 @@ public:
     QLabel *RudderOut;
     QLabel *label_5;
     QLabel *label_2;
+    QCustomPlot *RudderCommandPlot;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(693, 206);
+        MainWindow->resize(721, 585);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(12, 22, 681, 171));
-        verticalLayout_4 = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 22, 709, 558));
+        verticalLayout_5 = new QVBoxLayout(layoutWidget);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
 
         horizontalLayout->addWidget(label);
 
-        lcdNumber = new QLCDNumber(widget);
+        lcdNumber = new QLCDNumber(layoutWidget);
         lcdNumber->setObjectName(QString::fromUtf8("lcdNumber"));
 
         horizontalLayout->addWidget(lcdNumber);
@@ -86,7 +92,7 @@ public:
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        PitchCommand = new QSlider(widget);
+        PitchCommand = new QSlider(layoutWidget);
         PitchCommand->setObjectName(QString::fromUtf8("PitchCommand"));
         PitchCommand->setMinimumSize(QSize(400, 0));
         PitchCommand->setMaximumSize(QSize(400, 16777215));
@@ -96,7 +102,7 @@ public:
 
         verticalLayout_3->addWidget(PitchCommand);
 
-        RollCommand = new QSlider(widget);
+        RollCommand = new QSlider(layoutWidget);
         RollCommand->setObjectName(QString::fromUtf8("RollCommand"));
         RollCommand->setMinimumSize(QSize(400, 0));
         RollCommand->setMaximumSize(QSize(400, 16777215));
@@ -106,7 +112,7 @@ public:
 
         verticalLayout_3->addWidget(RollCommand);
 
-        YawRateCommand = new QSlider(widget);
+        YawRateCommand = new QSlider(layoutWidget);
         YawRateCommand->setObjectName(QString::fromUtf8("YawRateCommand"));
         YawRateCommand->setMinimumSize(QSize(400, 0));
         YawRateCommand->setMaximumSize(QSize(400, 16777215));
@@ -122,17 +128,17 @@ public:
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        label_6 = new QLabel(widget);
+        label_6 = new QLabel(layoutWidget);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
         verticalLayout_2->addWidget(label_6);
 
-        label_3 = new QLabel(widget);
+        label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         verticalLayout_2->addWidget(label_3);
 
-        label_4 = new QLabel(widget);
+        label_4 = new QLabel(layoutWidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         verticalLayout_2->addWidget(label_4);
@@ -143,21 +149,18 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        ElevatorOut = new QLabel(widget);
+        ElevatorOut = new QLabel(layoutWidget);
         ElevatorOut->setObjectName(QString::fromUtf8("ElevatorOut"));
-        ElevatorOut->setEnabled(true);
-        ElevatorOut->setMinimumSize(QSize(30, 0));
-        //ElevatorOut->setToolTipDuration(0);
 
         verticalLayout->addWidget(ElevatorOut);
 
-        AileronOut = new QLabel(widget);
+        AileronOut = new QLabel(layoutWidget);
         AileronOut->setObjectName(QString::fromUtf8("AileronOut"));
         AileronOut->setMinimumSize(QSize(30, 0));
 
         verticalLayout->addWidget(AileronOut);
 
-        RudderOut = new QLabel(widget);
+        RudderOut = new QLabel(layoutWidget);
         RudderOut->setObjectName(QString::fromUtf8("RudderOut"));
         RudderOut->setMinimumSize(QSize(30, 0));
 
@@ -166,18 +169,29 @@ public:
 
         horizontalLayout_2->addLayout(verticalLayout);
 
-        label_5 = new QLabel(widget);
+        label_5 = new QLabel(layoutWidget);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
         horizontalLayout_2->addWidget(label_5);
 
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         horizontalLayout_2->addWidget(label_2);
 
 
         verticalLayout_4->addLayout(horizontalLayout_2);
+
+
+        verticalLayout_5->addLayout(verticalLayout_4);
+
+        RudderCommandPlot = new QCustomPlot(layoutWidget);
+        RudderCommandPlot->setObjectName(QString::fromUtf8("RudderCommandPlot"));
+        RudderCommandPlot->setMinimumSize(QSize(600, 400));
+        RudderCommandPlot->setMaximumSize(QSize(700, 16777215));
+        RudderCommandPlot->setLayoutDirection(Qt::LeftToRight);
+
+        verticalLayout_5->addWidget(RudderCommandPlot);
 
         MainWindow->setCentralWidget(centralWidget);
         QWidget::setTabOrder(PitchCommand, RollCommand);

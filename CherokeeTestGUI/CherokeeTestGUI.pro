@@ -10,6 +10,11 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = CherokeeTestGUI
 TEMPLATE = app
+CONFIG  += qxt
+QXT     += core gui
+INCLUDEPATH += /usr/include/qwt-qt4
+LIBS += -lqwt -lm
+
 
 
 SOURCES += main.cpp\
@@ -41,7 +46,10 @@ SOURCES += main.cpp\
     RTIMUMagCal.cpp \
     RTIMUSettings.cpp \
     RTMath.cpp \
-    imuthread.cpp
+    imuthread.cpp \
+    producer.cpp \
+    consumer.cpp \
+    qcustomplot.cpp
 
 HEADERS  += mainwindow.h \
     RTMath.h \
@@ -77,6 +85,11 @@ HEADERS  += mainwindow.h \
     RTIMULibDefs.h \
     RTIMUMagCal.h \
     RTIMUSettings.h \
-    imuthread.h
+    imuthread.h \
+    producer.h \
+    consumer.h \
+    common.h \
+    myconstants.h \
+    qcustomplot.h
 
 FORMS    += mainwindow.ui

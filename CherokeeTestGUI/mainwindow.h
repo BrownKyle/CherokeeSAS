@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "consumer.h"
+#include "producer.h"
+#include <QSemaphore>
+
 
 namespace Ui {
 class MainWindow;
@@ -19,10 +23,20 @@ public:
     QString name() const;
 
     void timerEvent( QTimerEvent * );
+    void onBufferValueChanged(int);
+    void onProducerValueChanged(int);
+    void onConsumerValueChanged(int);
 
 private:
     Ui::MainWindow *ui;
     int value;
+
+    Producer *mProducer;
+    Consumer *mConsumer;
+
+public slots:
+    void plotnewvector(int *newvector);
+
 };
 
 #endif // MAINWINDOW_H

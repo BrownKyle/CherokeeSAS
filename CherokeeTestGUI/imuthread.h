@@ -9,17 +9,17 @@ public:
     void run();
 
     // ring buffer functions
-    int hasSample();
-    int getSample();
+    //int hasSample();
+    //int getSample();
 
 private:
 
     // data collected
-    int *samples;
+    //int *samples;
 
     // pointer to ringbuffer
-    int *pIn;
-    int *pOut;
+    //int *pIn;
+    //int *pOut;
 };
 
 #endif // IMUTHREAD_H
