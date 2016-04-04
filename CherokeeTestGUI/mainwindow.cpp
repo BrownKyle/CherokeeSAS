@@ -63,7 +63,7 @@ MainWindow::~MainWindow()
 void MainWindow::timerEvent( QTimerEvent * )
 {
     MainWindow window;
-    IMUThread imuthread;
+    //IMUThread imuthread;
     //value = imuthread.getSample();
     //this->ui->lcdNumber->display(value);
     //printf("/n The value from the TestStruct: %d/n",TestStruct.number);
