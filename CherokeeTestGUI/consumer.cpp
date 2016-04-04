@@ -36,7 +36,8 @@ void Consumer::run()
                 emit bufferFillCountChanged(usedBytes.available());
                 emit consumerCountChanged(i);
             };
-            emit newvector(*valueGz);
+            emit newvector(valueGz);
+            printf("", valueGz);
         }
     }
 }

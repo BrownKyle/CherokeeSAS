@@ -15,7 +15,7 @@ signals:
     //void stringConsumed(const QString &text);
     void bufferFillCountChanged(int cCount);
     void consumerCountChanged(int count);
-    void newvector(int PlotData);
+    void newvector(int *PlotData);
 
 public slots:
 };

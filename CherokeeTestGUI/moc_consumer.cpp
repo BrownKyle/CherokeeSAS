@@ -40,7 +40,7 @@ static const uint qt_meta_data_Consumer[] = {
 static const char qt_meta_stringdata_Consumer[] = {
     "Consumer\0\0cCount\0bufferFillCountChanged(int)\0"
     "count\0consumerCountChanged(int)\0"
-    "PlotData\0newvector(int)\0"
+    "PlotData\0newvector(int*)\0"
 };
 
 void Consumer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -51,7 +51,7 @@ void Consumer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         switch (_id) {
         case 0: _t->bufferFillCountChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->consumerCountChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 2: _t->newvector((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->newvector((*reinterpret_cast< int*(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -111,7 +111,7 @@ void Consumer::consumerCountChanged(int _t1)
 }
 
 // SIGNAL 2
-void Consumer::newvector(int _t1)
+void Consumer::newvector(int * _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
