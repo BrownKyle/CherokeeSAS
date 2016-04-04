@@ -35,7 +35,7 @@ private:
     Consumer *mConsumer;
 
 public slots:
-    void plotnewvector(int *newvector);
+    void plotnewvector(int newvector);
 
 };
 

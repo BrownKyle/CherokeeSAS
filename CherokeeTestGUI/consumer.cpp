@@ -30,14 +30,14 @@ void Consumer::run()
 
                 usedBytes.acquire();
                 valueGz[i]=buffer[i % BufferSize].Gyr.z;
-                printf("Gryro Z in consumer thread: %d", valueGz[i]);
+                printf("Gryro Z in consumer thread: %d3", valueGz[i]);
                 BufferReadCount++;
                 freeBytes.release();
                 emit bufferFillCountChanged(usedBytes.available());
                 emit consumerCountChanged(i);
+                emit newvector(valueGz[i]);
             };
-            emit newvector(valueGz);
-            printf("", valueGz);
+            //emit newvector(valueGz);
         }
     }
 }
