@@ -97,9 +97,6 @@ void Producer::run()
                 if(i % 20 == 0)
                 emit bufferFillCountChanged(usedBytes.available());
                 emit producerCountChanged(i);
-
-
-                mutex.lock();
                 /*
                 *pIn = imuData.fusionPose.z();
                 if (pIn == (&samples[MAX_SAMPLES-1]))
