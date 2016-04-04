@@ -6,7 +6,7 @@
 
 // BufferSize: maximum bytes that can be stored
 int buffer[BufferSize];
-int key=0;
+float key=0;
 int j=0;
 
 QSemaphore freeBytes(BufferSize);
@@ -74,20 +74,19 @@ void MainWindow::plotnewvector(int newvector)
 {
     //int numberofdatapoints;
     //numberofdatapoints = (sizeof(newvector)/sizeof(newvector[1]))
-    key = key + 0.01;
+    key = key + 0.1;
     ui->RudderCommandPlot->graph(0)->addData(key, newvector);
+    printf("\n Size of key : %f", key);
     j++;
 
     if (j>20){
         // remove data of lines that's outside visible range:
-        ui->RudderCommandPlot->graph(0)->removeDataBefore(key*100-8);
+        //ui->RudderCommandPlot->graph(0)->removeDataBefore(key-8);
         // rescale value (vertical) axis to fit the current data:
         ui->RudderCommandPlot->graph(0)->rescaleValueAxis();
         // make key axis range scroll with the data (at a constant range size of 8):
-        ui->RudderCommandPlot->xAxis->setRange(key+0.25, 8, Qt::AlignRight);
+        ui->RudderCommandPlot->xAxis->setRange(key+0.25, 10);
         ui->RudderCommandPlot->replot();
-        MainWindow w;
-        w.show();
         printf("Plotting Data \n");
         j = 0;
     }
