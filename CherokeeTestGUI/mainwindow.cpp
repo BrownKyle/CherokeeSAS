@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->RudderCommandPlot->graph(0)->setPen(QPen(Qt::red));
 
     ui->RudderCommandPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-    ui->RudderCommandPlot->xAxis->setDateTimeFormat("mm:ss");
+    ui->RudderCommandPlot->xAxis->setDateTimeFormat("hh:mm:ss");
     ui->RudderCommandPlot->xAxis->setAutoTickStep(false);
     ui->RudderCommandPlot->xAxis->setTickStep(2);
 
@@ -46,12 +46,11 @@ MainWindow::MainWindow(QWidget *parent) :
     mProducer = new Producer(this);
     mConsumer = new Consumer(this);
 
-
-
     mProducer->start();
     mConsumer->start();
 
-    connect(mConsumer,SIGNAL(newvector(int*)),this,SLOT(plotnewvector(int*)));
+
+    connect(mConsumer,SIGNAL(newvector(int)),this,SLOT(plotnewvector(int)));
 }
 
 
@@ -77,20 +76,19 @@ void MainWindow::plotnewvector(int newvector)
     //numberofdatapoints = (sizeof(newvector)/sizeof(newvector[1]))
     key = key + 0.01;
     ui->RudderCommandPlot->graph(0)->addData(key, newvector);
+    j++;
 
     if (j>20){
-
-        // calculate two new data points:
-        // key is time and value0 is data points to add
-
         // remove data of lines that's outside visible range:
-        ui->RudderCommandPlot->graph(0)->removeDataBefore(key-8);
-
+        ui->RudderCommandPlot->graph(0)->removeDataBefore(key*100-8);
         // rescale value (vertical) axis to fit the current data:
         ui->RudderCommandPlot->graph(0)->rescaleValueAxis();
         // make key axis range scroll with the data (at a constant range size of 8):
         ui->RudderCommandPlot->xAxis->setRange(key+0.25, 8, Qt::AlignRight);
         ui->RudderCommandPlot->replot();
+        MainWindow w;
+        w.show();
         printf("Plotting Data \n");
+        j = 0;
     }
 }
