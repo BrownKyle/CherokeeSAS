@@ -69,10 +69,10 @@ void Producer::run()
 
             if ((now - displayTimer) > 100000) {
                 // for testing comment out unused lines and change \n for \r,
-                printf("Observer Orientation Output. Roll: %.2f [deg] Pitch: %.2f [deg] Yaw: %.2f [deg]\n", (180/3.14)*imuData.fusionPose.x(),(180/3.14)*imuData.fusionPose.y(),(180/3.14)*imuData.fusionPose.z());
-                printf("Gryo Output. Roll Rate: %.2f [deg/s] Pitch Rate: %.2f [deg/s] Yaw Rate: %.2f [deg/s]\n", (180/3.14)*imuData.gyro.x(),(180/3.14)*imuData.gyro.y(),(180/3.14)*imuData.gyro.z());
-                printf("Accelerometer. X: %.2f [m/s^2] Y: %.2f [m/s^2] X: %.2f [m/s^2]\n", (9.81)*imuData.accel.x(),(9.81)*imuData.accel.y(),(9.81)*imuData.accel.z());
-                printf("Compass. Xmag: %.2f [uT] Ymag: %.2f [uT] X: %.2f [uT]\n", imuData.compass.x(),imuData.compass.y(),imuData.compass.z());
+                // printf("Observer Orientation Output. Roll: %.2f [deg] Pitch: %.2f [deg] Yaw: %.2f [deg]\n", (180/3.14)*imuData.fusionPose.x(),(180/3.14)*imuData.fusionPose.y(),(180/3.14)*imuData.fusionPose.z());
+                // printf("Gryo Output. Roll Rate: %.2f [deg/s] Pitch Rate: %.2f [deg/s] Yaw Rate: %.2f [deg/s]\n", (180/3.14)*imuData.gyro.x(),(180/3.14)*imuData.gyro.y(),(180/3.14)*imuData.gyro.z());
+                // printf("Accelerometer. X: %.2f [m/s^2] Y: %.2f [m/s^2] X: %.2f [m/s^2]\n", (9.81)*imuData.accel.x(),(9.81)*imuData.accel.y(),(9.81)*imuData.accel.z());
+                // printf("Compass. Xmag: %.2f [uT] Ymag: %.2f [uT] X: %.2f [uT]\n", imuData.compass.x(),imuData.compass.y(),imuData.compass.z());
                 displayTimer = now;
                 //printf("The number from the struct: %f", TestStruct.number);
 
@@ -97,6 +97,8 @@ void Producer::run()
                 if(i % 20 == 0)
                 emit bufferFillCountChanged(usedBytes.available());
                 emit producerCountChanged(i);
+
+                i++;
                 /*
                 *pIn = imuData.fusionPose.z();
                 if (pIn == (&samples[MAX_SAMPLES-1]))
