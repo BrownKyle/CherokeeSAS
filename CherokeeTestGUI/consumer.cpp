@@ -10,6 +10,7 @@ Consumer::Consumer(QObject *parent) :
 void Consumer::run()
 {
     int BufferReadCount = 0;
+
     /*
     for (int i = 0; i < DataSize; ++i) {
         usedBytes.acquire();

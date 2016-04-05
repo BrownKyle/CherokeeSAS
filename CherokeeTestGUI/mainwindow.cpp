@@ -3,9 +3,10 @@
 #include <RTIMULib.h>
 #include <imuthread.h>
 #include "myconstants.h"
+#include "common.h"
 
 // BufferSize: maximum bytes that can be stored
-int buffer[BufferSize];
+SetBuffer buffer[BufferSize];
 float key=0;
 int j=0;
 
@@ -28,12 +29,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->RudderCommandPlot->graph(0)->setPen(QPen(Qt::red));
 
     ui->RudderCommandPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-    ui->RudderCommandPlot->xAxis->setDateTimeFormat("hh:mm:ss");
-    ui->RudderCommandPlot->xAxis->setAutoTickStep(false);
-    ui->RudderCommandPlot->xAxis->setTickStep(2);
+    ui->RudderCommandPlot->xAxis->setDateTimeFormat("mm:ss");
+    //ui->RudderCommandPlot->xAxis->setAutoTickStep(false);
+    //ui->RudderCommandPlot->xAxis->setTickStep(2);
 
     //ui->RudderCommandPlot->xAxis->setRange(-1, 1);
-    ui->RudderCommandPlot->yAxis->setRange(-20, 20);
+    ui->RudderCommandPlot->yAxis->setRange(-1, 1);
 
     connect(ui->RudderCommandPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->RudderCommandPlot->xAxis2, SLOT(setRange(QCPRange)));
 
@@ -44,13 +45,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // make two threads
     mProducer = new Producer(this);
-    mConsumer = new Consumer(this);
+    //mConsumer = new Consumer(this);
 
     mProducer->start();
-    mConsumer->start();
+    //mConsumer->start();
 
 
-    connect(mConsumer,SIGNAL(newvector(int)),this,SLOT(plotnewvector(int)));
+    //connect(mConsumer,SIGNAL(newvector(int)),this,SLOT(plotnewvector(int)));
 }
 
 
@@ -60,34 +61,70 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::timerEvent( QTimerEvent * )
-{
-    MainWindow window;
+//void MainWindow::timerEvent( QTimerEvent * )
+//{
+    //MainWindow window;
     //IMUThread imuthread;
     //value = imuthread.getSample();
     //this->ui->lcdNumber->display(value);
     //printf("/n The value from the TestStruct: %d/n",TestStruct.number);
-    window.show();
-}
+  //  window.show();
+//}
 
-void MainWindow::plotnewvector(int newvector)
+void MainWindow::timerEvent(QTimerEvent *)
 {
+
+    //int BufferReadCount = 0;
+    /*
+    for (int i = 0; i < DataSize; ++i) {
+        usedBytes.acquire();
+        //printf("%c", buffer[i % BufferSize]);
+        freeBytes.release();
+        emit bufferFillCountChanged(usedBytes.available());
+        emit consumerCountChanged(i);
+        printf("Info in the buffer: %d \n",buffer[i % BufferSize].Gyr.x);
+    };
+    //printf("\n");
+    */
+    while(1){
+
+        //int valueGz[usedBytes.available()];
+
+        if (usedBytes.available()>0) {
+            for (int i=0; (i < usedBytes.available()); i++) {
+
+                usedBytes.acquire();
+                //valueGz[i]=buffer[i % BufferSize].Gyr.z;
+                ui->RudderCommandPlot->graph(0)->addData(buffer[i % BufferSize].time, buffer[i % BufferSize].Gyr.z);
+                //printf("Gryro Z in consumer thread: %d3", valueGz[i]);
+                //BufferReadCount++;
+                freeBytes.release();
+                //emit bufferFillCountChanged(usedBytes.available());
+                //emit consumerCountChanged(i);
+                //emit newvector(valueGz[i]);
+            };
+
+            ui->RudderCommandPlot->graph(0)->removeDataBefore(key-20);
+            ui->RudderCommandPlot->graph(0)->rescaleValueAxis();
+            ui->RudderCommandPlot->xAxis->setRange(key+0.25, 10);
+            ui->RudderCommandPlot->replot();
+        }
+    }
     //int numberofdatapoints;
     //numberofdatapoints = (sizeof(newvector)/sizeof(newvector[1]))
-    key = key + 0.1;
-    ui->RudderCommandPlot->graph(0)->addData(key, newvector);
-    printf("\n Size of key : %f", key);
-    j++;
+    //key = key + 0.1;
+    //ui->RudderCommandPlot->graph(0)->addData(key, newvector);
+    //printf("\n Size of key : %f", key);
+    //j++;
 
-    if (j>20){
+    //if (j>20){
         // remove data of lines that's outside visible range:
         //ui->RudderCommandPlot->graph(0)->removeDataBefore(key-8);
         // rescale value (vertical) axis to fit the current data:
-        ui->RudderCommandPlot->graph(0)->rescaleValueAxis();
+        //ui->RudderCommandPlot->graph(0)->rescaleValueAxis();
         // make key axis range scroll with the data (at a constant range size of 8):
-        ui->RudderCommandPlot->xAxis->setRange(key+0.25, 10);
-        ui->RudderCommandPlot->replot();
-        printf("Plotting Data \n");
-        j = 0;
-    }
+        //ui->RudderCommandPlot->xAxis->setRange(key+0.25, 10);
+        //ui->RudderCommandPlot->replot();
+        //printf("Plotting Data \n");
+        //j = 0;
 }

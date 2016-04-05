@@ -75,7 +75,7 @@ void Producer::run()
                 // printf("Compass. Xmag: %.2f [uT] Ymag: %.2f [uT] X: %.2f [uT]\n", imuData.compass.x(),imuData.compass.y(),imuData.compass.z());
                 displayTimer = now;
                 //printf("The number from the struct: %f", TestStruct.number);
-
+                mutex.lock();
                 freeBytes.acquire();
                 buffer[i % BufferSize].Gyr.x = imuData.gyro.x();
                 buffer[i % BufferSize].Gyr.y = imuData.gyro.y();
@@ -93,7 +93,10 @@ void Producer::run()
                 buffer[i % BufferSize].Mag.y = imuData.compass.y();
                 buffer[i % BufferSize].Mag.z = imuData.compass.z();
 
+                buffer[i % BufferSize].time = now;
+
                 usedBytes.release();
+                mutex.unlock();
                 if(i % 20 == 0)
                 emit bufferFillCountChanged(usedBytes.available());
                 emit producerCountChanged(i);

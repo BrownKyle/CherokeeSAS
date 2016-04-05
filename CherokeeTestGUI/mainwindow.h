@@ -7,6 +7,7 @@
 #include <QSemaphore>
 
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -32,10 +33,10 @@ private:
     int value;
 
     Producer *mProducer;
-    Consumer *mConsumer;
+    //Consumer *mConsumer;
 
 public slots:
-    void plotnewvector(int newvector);
+    //void plotnewvector(int newvector);
 
 };
 

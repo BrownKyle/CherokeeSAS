@@ -3,6 +3,8 @@
 
 #include <QSemaphore>
 #include "myconstants.h"
+#include <QtCore>
+
 
 struct XYZ
 {
@@ -17,11 +19,10 @@ struct SetBuffer
     struct XYZ Gyr;    //Gyro Angle Rate [rad]
     struct XYZ Acc;    //Acceleation [m/s/s]
     struct XYZ Mag;    //Magnetometer reading [uT]
+    u_int64_t time;
 };
 
 extern SetBuffer buffer[BufferSize];
-
-
 
 extern QSemaphore freeBytes;
 extern QSemaphore usedBytes;
