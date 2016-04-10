@@ -9,7 +9,7 @@
 int main(int argc, char *argv[])
 {
 
-    IMUThread imuthread;
+    //IMUThread imuthread;
     //imuthread.start();
     QApplication a(argc, argv);
 

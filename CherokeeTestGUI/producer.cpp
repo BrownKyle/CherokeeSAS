@@ -57,7 +57,7 @@ void Producer::run()
         //  poll at the rate recommended by the IMU
         int i = 0;
 
-        usleep(imu->IMUGetPollInterval() * 1000);
+        usleep(imu->IMUGetPollInterval() * 1000); // Reducing this number could reduce the poll time.
 
         while (imu->IMURead()) {
             mutex.lock();

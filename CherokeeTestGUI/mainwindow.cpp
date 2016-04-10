@@ -1,9 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <RTIMULib.h>
-#include <imuthread.h>
 #include "myconstants.h"
 #include "common.h"
+#include <QTime>
+#include <QTimer>
 
 // BufferSize: maximum bytes that can be stored
 SetBuffer buffer[BufferSize];
@@ -50,6 +51,10 @@ MainWindow::MainWindow(QWidget *parent) :
     mProducer->start();
     //mConsumer->start();
 
+    QTimer *timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(PlotData()));
+    timer->start(500);
+
 
     //connect(mConsumer,SIGNAL(newvector(int)),this,SLOT(plotnewvector(int)));
 }
@@ -71,8 +76,9 @@ MainWindow::~MainWindow()
   //  window.show();
 //}
 
-void MainWindow::timerEvent(QTimerEvent *)
+void MainWindow::PlotData()
 {
+    printf("Timer event occured");
 
     //int BufferReadCount = 0;
     /*
