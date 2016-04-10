@@ -2,7 +2,7 @@
 #include <QApplication>
 #include <RTIMULib.h>
 #include <QString>
-#include <imuthread.h>
+//#include <imuthread.h>
 
 
 
@@ -16,7 +16,9 @@ int main(int argc, char *argv[])
     //create the window
     MainWindow w;
 
+
     w.show();
+    w.startTimer(100);
 
     return a.exec();
 

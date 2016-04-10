@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QTimer *timer;
+    //QTimer *timer;
 
     void setName(const QString &name);
     QString name() const;
@@ -28,6 +28,7 @@ public:
     void onBufferValueChanged(int);
     void onProducerValueChanged(int);
     void onConsumerValueChanged(int);
+    void timerEvent( QTimerEvent * );
 
 private:
     Ui::MainWindow *ui;
@@ -38,7 +39,7 @@ private:
 
 public slots:
     //void plotnewvector(int newvector);
-    void PlotData();
+    //void PlotData();
 
 };
 

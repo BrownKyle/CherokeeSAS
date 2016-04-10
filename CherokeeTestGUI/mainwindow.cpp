@@ -3,13 +3,14 @@
 #include <RTIMULib.h>
 #include "myconstants.h"
 #include "common.h"
-#include <QTime>
-#include <QTimer>
+//#include <QTime>
+#include <QTimerEvent>
 
 // BufferSize: maximum bytes that can be stored
 SetBuffer buffer[BufferSize];
 float key=0;
 int j=0;
+int PlotTime;
 
 QSemaphore freeBytes(BufferSize);
 QSemaphore usedBytes;
@@ -51,9 +52,9 @@ MainWindow::MainWindow(QWidget *parent) :
     mProducer->start();
     //mConsumer->start();
 
-    QTimer *timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(PlotData()));
-    timer->start(500);
+    //QTimer *timer = new QTimer(this);
+    //connect(timer,SIGNAL(timeout()),this,SLOT(PlotData()));
+    //timer->start(500);
 
 
     //connect(mConsumer,SIGNAL(newvector(int)),this,SLOT(plotnewvector(int)));
@@ -76,9 +77,9 @@ MainWindow::~MainWindow()
   //  window.show();
 //}
 
-void MainWindow::PlotData()
+void MainWindow::timerEvent( QTimerEvent * )
 {
-    printf("Timer event occured");
+    //printf("Timer event occured");
 
     //int BufferReadCount = 0;
     /*
@@ -92,7 +93,7 @@ void MainWindow::PlotData()
     };
     //printf("\n");
     */
-    while(1){
+
 
         //int valueGz[usedBytes.available()];
 
@@ -101,7 +102,8 @@ void MainWindow::PlotData()
 
                 usedBytes.acquire();
                 //valueGz[i]=buffer[i % BufferSize].Gyr.z;
-                ui->RudderCommandPlot->graph(0)->addData(buffer[i % BufferSize].time, buffer[i % BufferSize].Gyr.z);
+                PlotTime = buffer[i % BufferSize].time;
+                ui->RudderCommandPlot->graph(0)->addData(PlotTime, buffer[i % BufferSize].Gyr.z);
                 //printf("Gryro Z in consumer thread: %d3", valueGz[i]);
                 //BufferReadCount++;
                 freeBytes.release();
@@ -110,12 +112,12 @@ void MainWindow::PlotData()
                 //emit newvector(valueGz[i]);
             };
 
-            ui->RudderCommandPlot->graph(0)->removeDataBefore(key-20);
+            ui->RudderCommandPlot->graph(0)->removeDataBefore(PlotTime-20);
             ui->RudderCommandPlot->graph(0)->rescaleValueAxis();
-            ui->RudderCommandPlot->xAxis->setRange(key+0.25, 10);
+            ui->RudderCommandPlot->xAxis->setRange(PlotTime+0.25, 10);
             ui->RudderCommandPlot->replot();
         }
-    }
+
     //int numberofdatapoints;
     //numberofdatapoints = (sizeof(newvector)/sizeof(newvector[1]))
     //key = key + 0.1;
