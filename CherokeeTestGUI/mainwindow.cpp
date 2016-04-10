@@ -10,8 +10,8 @@
 SetBuffer buffer[BufferSize];
 float key=0;
 int j=0;
-int PlotTime;
-
+double PlotTime;
+uint64_t StartTime = RTMath::currentUSecsSinceEpoch();
 QSemaphore freeBytes(BufferSize);
 QSemaphore usedBytes;
 
@@ -102,7 +102,7 @@ void MainWindow::timerEvent( QTimerEvent * )
 
                 usedBytes.acquire();
                 //valueGz[i]=buffer[i % BufferSize].Gyr.z;
-                PlotTime = buffer[i % BufferSize].time;
+                PlotTime = (buffer[i % BufferSize].time-StartTime)/1000000.00;
                 ui->RudderCommandPlot->graph(0)->addData(PlotTime, buffer[i % BufferSize].Gyr.z);
                 //printf("Gryro Z in consumer thread: %d3", valueGz[i]);
                 //BufferReadCount++;
@@ -111,10 +111,10 @@ void MainWindow::timerEvent( QTimerEvent * )
                 //emit consumerCountChanged(i);
                 //emit newvector(valueGz[i]);
             };
-
+            printf("%f \n",PlotTime);
             ui->RudderCommandPlot->graph(0)->removeDataBefore(PlotTime-20);
             ui->RudderCommandPlot->graph(0)->rescaleValueAxis();
-            ui->RudderCommandPlot->xAxis->setRange(PlotTime+0.25, 10);
+            ui->RudderCommandPlot->xAxis->setRange(PlotTime+0.25, PlotTime-20);
             ui->RudderCommandPlot->replot();
         }
 

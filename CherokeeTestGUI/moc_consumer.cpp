@@ -30,17 +30,17 @@ static const uint qt_meta_data_Consumer[] = {
        3,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
-      17,   10,    9,    9, 0x05,
-      51,   45,    9,    9, 0x05,
-      86,   77,    9,    9, 0x05,
+       9,   37,   44,   44, 0x05,
+      45,   71,   44,   44, 0x05,
+      77,   92,   44,   44, 0x05,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Consumer[] = {
-    "Consumer\0\0cCount\0bufferFillCountChanged(int)\0"
-    "count\0consumerCountChanged(int)\0"
-    "PlotData\0newvector(int)\0"
+    "Consumer\0bufferFillCountChanged(int)\0"
+    "cCount\0\0consumerCountChanged(int)\0"
+    "count\0newvector(int)\0PlotData\0"
 };
 
 void Consumer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)

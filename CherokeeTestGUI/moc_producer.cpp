@@ -30,15 +30,16 @@ static const uint qt_meta_data_Producer[] = {
        2,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
-      17,   10,    9,    9, 0x05,
-      51,   45,    9,    9, 0x05,
+       9,   37,   44,   44, 0x05,
+      45,   71,   44,   44, 0x05,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Producer[] = {
-    "Producer\0\0bCount\0bufferFillCountChanged(int)\0"
-    "count\0producerCountChanged(int)\0"
+    "Producer\0bufferFillCountChanged(int)\0"
+    "bCount\0\0producerCountChanged(int)\0"
+    "count\0"
 };
 
 void Producer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
