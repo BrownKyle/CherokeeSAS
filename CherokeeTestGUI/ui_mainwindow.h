@@ -15,7 +15,6 @@
 #include <QtGui/QButtonGroup>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
-#include <QtGui/QLCDNumber>
 #include <QtGui/QLabel>
 #include <QtGui/QMainWindow>
 #include <QtGui/QSlider>
@@ -32,9 +31,6 @@ public:
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_5;
     QVBoxLayout *verticalLayout_4;
-    QHBoxLayout *horizontalLayout;
-    QLabel *label;
-    QLCDNumber *lcdNumber;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_3;
     QSlider *PitchCommand;
@@ -56,7 +52,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(721, 585);
+        MainWindow->resize(1054, 585);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
@@ -70,22 +66,6 @@ public:
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label = new QLabel(layoutWidget);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        horizontalLayout->addWidget(label);
-
-        lcdNumber = new QLCDNumber(layoutWidget);
-        lcdNumber->setObjectName(QString::fromUtf8("lcdNumber"));
-
-        horizontalLayout->addWidget(lcdNumber);
-
-
-        verticalLayout_4->addLayout(horizontalLayout);
-
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -205,7 +185,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MainWindow", "Gyro Rate Z", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "Elevator Deflection:", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "Aileron Deflection:", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("MainWindow", "Rudder Defecection:", 0, QApplication::UnicodeUTF8));

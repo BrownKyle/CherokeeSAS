@@ -44,10 +44,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->RudderCommandPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->RudderCommandPlot->xAxis2, SLOT(setRange(QCPRange)));
 
 
-    connect(ui->PitchCommand,SIGNAL(valueChanged(int)),this,SLOT(setRudderPilot(int)));
+    connect(ui->PitchCommand,SIGNAL(valueChanged(int)),this,SLOT(setElevatorPilot(int)));
     connect(ui->RollCommand,SIGNAL(valueChanged(int)),this,SLOT(setAileronPilot(int)));
-    connect(ui->YawRateCommand,SIGNAL(valueChanged(int)),this,SLOT(setElevatorPilot(int)));
+    connect(ui->YawRateCommand,SIGNAL(valueChanged(int)),this,SLOT(setRudderPilot(int)));
     connect(this,SIGNAL(PitchRateF(int)),this,SLOT(CalculateElevatorCommand(int)));
+    connect(this,SIGNAL(RollRateF(int)),this,SLOT(CalculateAileronCommand(int)));
+    connect(this,SIGNAL(YawRateF(int)),this,SLOT(CalculateRudderCommand(int)));
 
     // make two threads
     mProducer = new Producer(this);
@@ -151,7 +153,7 @@ void MainWindow::timerEvent( QTimerEvent * )
                 //BufferReadCount++;
 
                 //emit newvector(valueGz[i]);
-                if (usedBytes.available() == 1){
+                if (usedBytes.available() < 2){
                     emit YawRateF(buffer[j % BufferSize].Gyr.z);
                     emit RollRateF(buffer[j % BufferSize].Gyr.x);
                     emit PitchRateF(buffer[j % BufferSize].Gyr.y);
