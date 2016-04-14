@@ -26,6 +26,7 @@ void Producer::run()
     uint64_t now;
     uint64_t displayTimer;
 
+    
     QMutex mutex;
 
     // mutex prevents the CPU from stopping to work on another thread
@@ -52,10 +53,10 @@ void Producer::run()
     displayTimer = RTMath::currentUSecsSinceEpoch();
 
     //  now just process data
-
+    int i = 0;
     while (1) {
         //  poll at the rate recommended by the IMU
-        int i = 0;
+        //int i = 0;
 
         usleep(imu->IMUGetPollInterval() * 1000); // Reducing this number could reduce the poll time.
 
@@ -63,23 +64,23 @@ void Producer::run()
             mutex.lock();
             RTIMU_DATA imuData = imu->getIMUData();
             now = RTMath::currentUSecsSinceEpoch();
-            mutex.unlock();
+            //mutex.unlock();
 
             //  display 10 times per second
 
-            if ((now - displayTimer) > 100000) {
+            //if ((now - displayTimer) > 100000) {
                 // for testing comment out unused lines and change \n for \r,
                 // printf("Observer Orientation Output. Roll: %.2f [deg] Pitch: %.2f [deg] Yaw: %.2f [deg]\n", (180/3.14)*imuData.fusionPose.x(),(180/3.14)*imuData.fusionPose.y(),(180/3.14)*imuData.fusionPose.z());
                 // printf("Gryo Output. Roll Rate: %.2f [deg/s] Pitch Rate: %.2f [deg/s] Yaw Rate: %.2f [deg/s]\n", (180/3.14)*imuData.gyro.x(),(180/3.14)*imuData.gyro.y(),(180/3.14)*imuData.gyro.z());
                 // printf("Accelerometer. X: %.2f [m/s^2] Y: %.2f [m/s^2] X: %.2f [m/s^2]\n", (9.81)*imuData.accel.x(),(9.81)*imuData.accel.y(),(9.81)*imuData.accel.z());
                 // printf("Compass. Xmag: %.2f [uT] Ymag: %.2f [uT] X: %.2f [uT]\n", imuData.compass.x(),imuData.compass.y(),imuData.compass.z());
-                displayTimer = now;
+                //displayTimer = now;
                 //printf("The number from the struct: %f", TestStruct.number);
-                mutex.lock();
+                //mutex.lock();
                 freeBytes.acquire();
                 buffer[i % BufferSize].Gyr.x = imuData.gyro.x();
                 buffer[i % BufferSize].Gyr.y = imuData.gyro.y();
-                buffer[i % BufferSize].Gyr.z = imuData.gyro.z();
+                buffer[i % BufferSize].Gyr.z = imuData.gyro.z()*1.00001;
 
                 buffer[i % BufferSize].Ang.x = imuData.fusionPose.x();
                 buffer[i % BufferSize].Ang.y = imuData.fusionPose.y();
@@ -94,12 +95,11 @@ void Producer::run()
                 buffer[i % BufferSize].Mag.z = imuData.compass.z();
 
                 buffer[i % BufferSize].time = now;
-
                 usedBytes.release();
                 mutex.unlock();
-                if(i % 20 == 0)
-                emit bufferFillCountChanged(usedBytes.available());
-                emit producerCountChanged(i);
+                //if(i % 20 == 0)
+                //emit bufferFillCountChanged(usedBytes.available());
+                //emit producerCountChanged(i);
 
                 i++;
                 /*
@@ -111,7 +111,7 @@ void Producer::run()
                 mutex.unlock();
                 */
 
-           }
+           //}
         }
     }
 }

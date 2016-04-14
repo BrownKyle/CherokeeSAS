@@ -14,7 +14,7 @@ double PlotTime;
 uint64_t StartTime = RTMath::currentUSecsSinceEpoch();
 QSemaphore freeBytes(BufferSize);
 QSemaphore usedBytes;
-
+int Command = 0;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -79,6 +79,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::timerEvent( QTimerEvent * )
 {
+    QMutex mutex;
     //printf("Timer event occured");
 
     //int BufferReadCount = 0;
@@ -96,27 +97,31 @@ void MainWindow::timerEvent( QTimerEvent * )
 
 
         //int valueGz[usedBytes.available()];
-
+        mutex.lock();
         if (usedBytes.available()>0) {
+            //printf("%f", usedBytes.available());
             for (int i=0; (i < usedBytes.available()); i++) {
 
                 usedBytes.acquire();
                 //valueGz[i]=buffer[i % BufferSize].Gyr.z;
-                PlotTime = (buffer[i % BufferSize].time-StartTime)/1000000.00;
-                ui->RudderCommandPlot->graph(0)->addData(PlotTime, buffer[i % BufferSize].Gyr.z);
+                Command = 0.4*(0.1*(buffer[j % BufferSize].Gyr.z - Command) + buffer[j % BufferSize].Gyr.z);
+                PlotTime = (buffer[j % BufferSize].time-StartTime)/1000000.00;
+                ui->RudderCommandPlot->graph(0)->addData(PlotTime, Command);
                 //printf("Gryro Z in consumer thread: %d3", valueGz[i]);
                 //BufferReadCount++;
                 freeBytes.release();
-                //emit bufferFillCountChanged(usedBytes.available());
-                //emit consumerCountChanged(i);
+                emit bufferFillCountChanged(usedBytes.available());
+                emit consumerCountChanged(i);
                 //emit newvector(valueGz[i]);
+                j++;
             };
-            printf("%f \n",PlotTime);
-            ui->RudderCommandPlot->graph(0)->removeDataBefore(PlotTime-20);
+           // printf("Plot time:%f \n",PlotTime);
+            //ui->RudderCommandPlot->graph(0)->removeDataBefore(PlotTime-20);
             ui->RudderCommandPlot->graph(0)->rescaleValueAxis();
             ui->RudderCommandPlot->xAxis->setRange(PlotTime+0.25, PlotTime-20);
             ui->RudderCommandPlot->replot();
         }
+        mutex.unlock();
 
     //int numberofdatapoints;
     //numberofdatapoints = (sizeof(newvector)/sizeof(newvector[1]))

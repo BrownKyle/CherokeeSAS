@@ -30,6 +30,10 @@ public:
     void onConsumerValueChanged(int);
     void timerEvent( QTimerEvent * );
 
+signals:
+    void bufferFillCountChanged(int cCount);
+    void consumerCountChanged(int count);
+
 private:
     Ui::MainWindow *ui;
     int value;
