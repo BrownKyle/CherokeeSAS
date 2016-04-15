@@ -28,8 +28,8 @@
   <widget class="QWidget" name="centralWidget">
    <property name="minimumSize">
     <size>
-     <width>0</width>
-     <height>720</height>
+     <width>1280</width>
+     <height>1024</height>
     </size>
    </property>
    <property name="maximumSize">
