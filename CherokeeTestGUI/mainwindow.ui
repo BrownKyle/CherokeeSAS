@@ -44,19 +44,19 @@
       <x>10</x>
       <y>22</y>
       <width>1282</width>
-      <height>240</height>
+      <height>1000</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
       <width>0</width>
-      <height>240</height>
+      <height>1000</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
       <width>16777215</width>
-      <height>240</height>
+      <height>1000</height>
      </size>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
