@@ -49,7 +49,8 @@ SOURCES += main.cpp\
     imuthread.cpp \
     producer.cpp \
     consumer.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    qFlightInstruments.cpp
 
 HEADERS  += mainwindow.h \
     RTMath.h \
@@ -90,6 +91,7 @@ HEADERS  += mainwindow.h \
     consumer.h \
     common.h \
     myconstants.h \
-    qcustomplot.h
+    qcustomplot.h \
+    qFlightInstruments.h
 
 FORMS    += mainwindow.ui

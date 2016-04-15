@@ -30,9 +30,13 @@ public:
     void onConsumerValueChanged(int);
     void timerEvent( QTimerEvent * );
 
+
 signals:
     void bufferFillCountChanged(int cCount);
     void consumerCountChanged(int count);
+    void YawRateF(int YawRateFB);
+    void RollRateF(int RollRateFB);
+    void PitchRateF(int PitchRateFB);
 
 private:
     Ui::MainWindow *ui;
@@ -44,6 +48,13 @@ private:
 public slots:
     //void plotnewvector(int newvector);
     //void PlotData();
+    void setRudderPilot(int RudderCommandP );
+    void setAileronPilot(int AileronCommandP );
+    void setElevatorPilot(int ElevatorCommandP );
+
+    void CalculateRudderCommand( int YawRateFB );
+    void CalculateAileronCommand( int RollRateFB );
+    void CalculateElevatorCommand( int PitchRateFB );
 
 };
 
