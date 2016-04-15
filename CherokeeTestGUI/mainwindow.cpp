@@ -5,6 +5,7 @@
 #include "common.h"
 //#include <QTime>
 #include <QTimerEvent>
+#include "rpiServo.h"
 
 // BufferSize: maximum bytes that can be stored
 SetBuffer buffer[BufferSize];
@@ -92,6 +93,8 @@ void MainWindow::CalculateRudderCommand( int YawRateFB )
     int RudderOut;
     RudderOut = RudCommandP - YawRateFB*0.6;
     ui->RudderOut->setNum(RudderOut);
+    rpiServo servcom;
+    servcom.setAngle(RudderOut);
 }
 
 void MainWindow::CalculateAileronCommand( int RollRateFB )

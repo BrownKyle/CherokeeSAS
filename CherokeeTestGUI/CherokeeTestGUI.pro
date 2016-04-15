@@ -49,7 +49,9 @@ SOURCES += main.cpp\
     imuthread.cpp \
     producer.cpp \
     consumer.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    rpiPWM1.cpp \
+    rpiServo.cpp
 
 HEADERS  += mainwindow.h \
     RTMath.h \
@@ -90,6 +92,9 @@ HEADERS  += mainwindow.h \
     consumer.h \
     common.h \
     myconstants.h \
-    qcustomplot.h
+    qcustomplot.h \
+    rpiPWM1.h \
+    rpiServo.h \
+    ui_mainwindow.h
 
 FORMS    += mainwindow.ui
