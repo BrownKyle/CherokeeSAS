@@ -38,14 +38,26 @@
      <height>1024</height>
     </size>
    </property>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>22</y>
       <width>1282</width>
-      <height>1199</height>
+      <height>240</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>240</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>240</height>
+     </size>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
      <item>
@@ -135,6 +147,12 @@
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
             <widget class="QLabel" name="label_6">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>Elevator Deflection:</string>
              </property>
@@ -142,6 +160,12 @@
            </item>
            <item>
             <widget class="QLabel" name="label_3">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>Aileron Deflection:</string>
              </property>
@@ -149,6 +173,12 @@
            </item>
            <item>
             <widget class="QLabel" name="label_4">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>Rudder Defecection:</string>
              </property>
@@ -160,6 +190,12 @@
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <widget class="QLabel" name="ElevatorOut">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>0</string>
              </property>
@@ -171,6 +207,12 @@
               <size>
                <width>30</width>
                <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
               </size>
              </property>
              <property name="text">
@@ -186,26 +228,18 @@
                <height>0</height>
               </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>0</string>
              </property>
             </widget>
            </item>
           </layout>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>
@@ -216,13 +250,13 @@
        <property name="minimumSize">
         <size>
          <width>1100</width>
-         <height>980</height>
+         <height>784</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>1240</width>
-         <height>980</height>
+         <height>1024</height>
         </size>
        </property>
        <property name="layoutDirection">
