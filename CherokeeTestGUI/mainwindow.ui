@@ -32,7 +32,7 @@
       <x>10</x>
       <y>22</y>
       <width>1282</width>
-      <height>691</height>
+      <height>839</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -204,13 +204,13 @@
        <property name="minimumSize">
         <size>
          <width>1100</width>
-         <height>400</height>
+         <height>720</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>1240</width>
-         <height>16777215</height>
+         <height>720</height>
         </size>
        </property>
        <property name="layoutDirection">
