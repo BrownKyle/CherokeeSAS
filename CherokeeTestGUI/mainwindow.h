@@ -34,9 +34,9 @@ public:
 signals:
     void bufferFillCountChanged(int cCount);
     void consumerCountChanged(int count);
-    void YawRateF(int YawRateFB);
-    void RollRateF(int RollRateFB);
-    void PitchRateF(int PitchRateFB);
+    void YawRateF(float YawRateFB);
+    void RollRateF(float RollRateFB);
+    void PitchRateF(float PitchRateFB);
 
 private:
     Ui::MainWindow *ui;
@@ -52,9 +52,9 @@ public slots:
     void setAileronPilot(int AileronCommandP );
     void setElevatorPilot(int ElevatorCommandP );
 
-    void CalculateRudderCommand( int YawRateFB );
-    void CalculateAileronCommand( int RollRateFB );
-    void CalculateElevatorCommand( int PitchRateFB );
+    void CalculateRudderCommand( float YawRateFB );
+    void CalculateAileronCommand( float RollRateFB );
+    void CalculateElevatorCommand( float PitchRateFB );
 
 };
 

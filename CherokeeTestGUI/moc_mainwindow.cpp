@@ -32,17 +32,17 @@ static const uint qt_meta_data_MainWindow[] = {
  // signals: signature, parameters, type, tag, flags
       11,   39,   46,   46, 0x05,
       47,   73,   46,   46, 0x05,
-      79,   93,   46,   46, 0x05,
-     103,  118,   46,   46, 0x05,
-     129,  145,   46,   46, 0x05,
+      79,   95,   46,   46, 0x05,
+     105,  122,   46,   46, 0x05,
+     133,  151,   46,   46, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-     157,  177,   46,   46, 0x0a,
-     192,  213,   46,   46, 0x0a,
-     229,  251,   46,   46, 0x0a,
-     268,   93,   46,   46, 0x0a,
-     296,  118,   46,   46, 0x0a,
-     325,  145,   46,   46, 0x0a,
+     163,  183,   46,   46, 0x0a,
+     198,  219,   46,   46, 0x0a,
+     235,  257,   46,   46, 0x0a,
+     274,   95,   46,   46, 0x0a,
+     304,  122,   46,   46, 0x0a,
+     335,  151,   46,   46, 0x0a,
 
        0        // eod
 };
@@ -50,14 +50,15 @@ static const uint qt_meta_data_MainWindow[] = {
 static const char qt_meta_stringdata_MainWindow[] = {
     "MainWindow\0bufferFillCountChanged(int)\0"
     "cCount\0\0consumerCountChanged(int)\0"
-    "count\0YawRateF(int)\0YawRateFB\0"
-    "RollRateF(int)\0RollRateFB\0PitchRateF(int)\0"
-    "PitchRateFB\0setRudderPilot(int)\0"
-    "RudderCommandP\0setAileronPilot(int)\0"
-    "AileronCommandP\0setElevatorPilot(int)\0"
-    "ElevatorCommandP\0CalculateRudderCommand(int)\0"
-    "CalculateAileronCommand(int)\0"
-    "CalculateElevatorCommand(int)\0"
+    "count\0YawRateF(float)\0YawRateFB\0"
+    "RollRateF(float)\0RollRateFB\0"
+    "PitchRateF(float)\0PitchRateFB\0"
+    "setRudderPilot(int)\0RudderCommandP\0"
+    "setAileronPilot(int)\0AileronCommandP\0"
+    "setElevatorPilot(int)\0ElevatorCommandP\0"
+    "CalculateRudderCommand(float)\0"
+    "CalculateAileronCommand(float)\0"
+    "CalculateElevatorCommand(float)\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -68,15 +69,15 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->bufferFillCountChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->consumerCountChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 2: _t->YawRateF((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 3: _t->RollRateF((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: _t->PitchRateF((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->YawRateF((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 3: _t->RollRateF((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 4: _t->PitchRateF((*reinterpret_cast< float(*)>(_a[1]))); break;
         case 5: _t->setRudderPilot((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 6: _t->setAileronPilot((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 7: _t->setElevatorPilot((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 8: _t->CalculateRudderCommand((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: _t->CalculateAileronCommand((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 10: _t->CalculateElevatorCommand((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: _t->CalculateRudderCommand((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 9: _t->CalculateAileronCommand((*reinterpret_cast< float(*)>(_a[1]))); break;
+        case 10: _t->CalculateElevatorCommand((*reinterpret_cast< float(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -136,21 +137,21 @@ void MainWindow::consumerCountChanged(int _t1)
 }
 
 // SIGNAL 2
-void MainWindow::YawRateF(int _t1)
+void MainWindow::YawRateF(float _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 
 // SIGNAL 3
-void MainWindow::RollRateF(int _t1)
+void MainWindow::RollRateF(float _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);
 }
 
 // SIGNAL 4
-void MainWindow::PitchRateF(int _t1)
+void MainWindow::PitchRateF(float _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 4, _a);

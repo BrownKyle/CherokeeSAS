@@ -47,9 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->PitchCommand,SIGNAL(valueChanged(int)),this,SLOT(setElevatorPilot(int)));
     connect(ui->RollCommand,SIGNAL(valueChanged(int)),this,SLOT(setAileronPilot(int)));
     connect(ui->YawRateCommand,SIGNAL(valueChanged(int)),this,SLOT(setRudderPilot(int)));
-    connect(this,SIGNAL(PitchRateF(int)),this,SLOT(CalculateElevatorCommand(int)));
-    connect(this,SIGNAL(RollRateF(int)),this,SLOT(CalculateAileronCommand(int)));
-    connect(this,SIGNAL(YawRateF(int)),this,SLOT(CalculateRudderCommand(int)));
+    connect(this,SIGNAL(PitchRateF(float)),this,SLOT(CalculateElevatorCommand(float)));
+    connect(this,SIGNAL(RollRateF(float)),this,SLOT(CalculateAileronCommand(float)));
+    connect(this,SIGNAL(YawRateF(float)),this,SLOT(CalculateRudderCommand(float)));
 
     // make two threads
     mProducer = new Producer(this);
@@ -87,23 +87,23 @@ void MainWindow::setElevatorPilot( int ElevatorCommandP )
     EleCommandP = ElevatorCommandP;
 }
 
-void MainWindow::CalculateRudderCommand( int YawRateFB )
+void MainWindow::CalculateRudderCommand( float YawRateFB )
 {
-    float RudderOut;
+    int RudderOut;
     RudderOut = RudCommandP - YawRateFB*0.3;
     ui->RudderOut->setNum(RudderOut);
 }
 
-void MainWindow::CalculateAileronCommand( int RollRateFB )
+void MainWindow::CalculateAileronCommand( float RollRateFB )
 {
-    float AileronOut;
+    int AileronOut;
     AileronOut = AilCommandP - RollRateFB*0.3;
     ui->AileronOut->setNum(AileronOut);
 }
 
-void MainWindow::CalculateElevatorCommand( int PitchRateFB )
+void MainWindow::CalculateElevatorCommand( float PitchRateFB )
 {
-    float ElevatorOut;
+    int ElevatorOut;
     ElevatorOut = EleCommandP - PitchRateFB*0.3;
     ui->ElevatorOut->setNum(ElevatorOut);
 }
@@ -146,14 +146,14 @@ void MainWindow::timerEvent( QTimerEvent * )
 
                 usedBytes.acquire();
                 //valueGz[i]=buffer[i % BufferSize].Gyr.z;
-                Command = RudCommandP - 0.3*(0.1*(buffer[j % BufferSize].Gyr.z - Command) + buffer[j % BufferSize].Gyr.z);
+                Command = RudCommandP - 0.3*(0.8*(buffer[j % BufferSize].Gyr.z - Command) + buffer[j % BufferSize].Gyr.z);
                 PlotTime = (buffer[j % BufferSize].time-StartTime)/1000000.00;
                 ui->RudderCommandPlot->graph(0)->addData(PlotTime, Command);
                 //printf("Gryro Z in consumer thread: %d3", valueGz[i]);
                 //BufferReadCount++;
 
                 //emit newvector(valueGz[i]);
-                if (usedBytes.available() < 2){
+                if (i == 2){
                     emit YawRateF(buffer[j % BufferSize].Gyr.z);
                     emit RollRateF(buffer[j % BufferSize].Gyr.x);
                     emit PitchRateF(buffer[j % BufferSize].Gyr.y);
