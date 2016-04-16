@@ -90,21 +90,21 @@ void MainWindow::setElevatorPilot( int ElevatorCommandP )
 void MainWindow::CalculateRudderCommand( int YawRateFB )
 {
     float RudderOut;
-    RudderOut = RudCommandP - YawRateFB*0.6;
+    RudderOut = RudCommandP - YawRateFB*0.3;
     ui->RudderOut->setNum(RudderOut);
 }
 
 void MainWindow::CalculateAileronCommand( int RollRateFB )
 {
     float AileronOut;
-    AileronOut = AilCommandP - RollRateFB*0.6;
+    AileronOut = AilCommandP - RollRateFB*0.3;
     ui->AileronOut->setNum(AileronOut);
 }
 
 void MainWindow::CalculateElevatorCommand( int PitchRateFB )
 {
     float ElevatorOut;
-    ElevatorOut = EleCommandP - PitchRateFB*0.6;
+    ElevatorOut = EleCommandP - PitchRateFB*0.3;
     ui->ElevatorOut->setNum(ElevatorOut);
 }
 
@@ -146,7 +146,7 @@ void MainWindow::timerEvent( QTimerEvent * )
 
                 usedBytes.acquire();
                 //valueGz[i]=buffer[i % BufferSize].Gyr.z;
-                Command = RudCommandP - 0.6*(0.1*(buffer[j % BufferSize].Gyr.z - Command) + buffer[j % BufferSize].Gyr.z);
+                Command = RudCommandP - 0.3*(0.1*(buffer[j % BufferSize].Gyr.z - Command) + buffer[j % BufferSize].Gyr.z);
                 PlotTime = (buffer[j % BufferSize].time-StartTime)/1000000.00;
                 ui->RudderCommandPlot->graph(0)->addData(PlotTime, Command);
                 //printf("Gryro Z in consumer thread: %d3", valueGz[i]);
