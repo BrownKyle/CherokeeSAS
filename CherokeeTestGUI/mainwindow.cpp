@@ -14,7 +14,7 @@ double PlotTime;
 uint64_t StartTime = RTMath::currentUSecsSinceEpoch();
 QSemaphore freeBytes(BufferSize);
 QSemaphore usedBytes;
-int Command = 0;
+float Command = 0;
 float RudCommandP;
 float EleCommandP;
 float AilCommandP;
@@ -89,21 +89,21 @@ void MainWindow::setElevatorPilot( int ElevatorCommandP )
 
 void MainWindow::CalculateRudderCommand( int YawRateFB )
 {
-    int RudderOut;
+    float RudderOut;
     RudderOut = RudCommandP - YawRateFB*0.6;
     ui->RudderOut->setNum(RudderOut);
 }
 
 void MainWindow::CalculateAileronCommand( int RollRateFB )
 {
-    int AileronOut;
+    float AileronOut;
     AileronOut = AilCommandP - RollRateFB*0.6;
     ui->AileronOut->setNum(AileronOut);
 }
 
 void MainWindow::CalculateElevatorCommand( int PitchRateFB )
 {
-    int ElevatorOut;
+    float ElevatorOut;
     ElevatorOut = EleCommandP - PitchRateFB*0.6;
     ui->ElevatorOut->setNum(ElevatorOut);
 }
@@ -146,7 +146,7 @@ void MainWindow::timerEvent( QTimerEvent * )
 
                 usedBytes.acquire();
                 //valueGz[i]=buffer[i % BufferSize].Gyr.z;
-                Command = RudCommandP - 0.4*(0.1*(buffer[j % BufferSize].Gyr.z - Command) + buffer[j % BufferSize].Gyr.z);
+                Command = RudCommandP - 0.6*(0.1*(buffer[j % BufferSize].Gyr.z - Command) + buffer[j % BufferSize].Gyr.z);
                 PlotTime = (buffer[j % BufferSize].time-StartTime)/1000000.00;
                 ui->RudderCommandPlot->graph(0)->addData(PlotTime, Command);
                 //printf("Gryro Z in consumer thread: %d3", valueGz[i]);
@@ -164,7 +164,7 @@ void MainWindow::timerEvent( QTimerEvent * )
                 j++;
             };
            // printf("Plot time:%f \n",PlotTime);
-            //ui->RudderCommandPlot->graph(0)->removeDataBefore(PlotTime-20);
+            ui->RudderCommandPlot->graph(0)->removeDataBefore(PlotTime-20);
             ui->RudderCommandPlot->graph(0)->rescaleValueAxis();
             ui->RudderCommandPlot->xAxis->setRange(PlotTime+0.25, PlotTime-20);
             ui->RudderCommandPlot->replot();

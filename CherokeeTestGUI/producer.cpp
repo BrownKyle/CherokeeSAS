@@ -24,7 +24,7 @@ void Producer::run()
     //}
 
     uint64_t now;
-    uint64_t displayTimer;
+    //uint64_t displayTimer;
 
     
     QMutex mutex;
@@ -50,7 +50,7 @@ void Producer::run()
     //unlock mutex
     mutex.unlock();
 
-    displayTimer = RTMath::currentUSecsSinceEpoch();
+    //displayTimer = RTMath::currentUSecsSinceEpoch();
 
     //  now just process data
     int i = 0;
@@ -58,7 +58,7 @@ void Producer::run()
         //  poll at the rate recommended by the IMU
         //int i = 0;
 
-        usleep(imu->IMUGetPollInterval() * 1000); // Reducing this number could reduce the poll time.
+        usleep(imu->IMUGetPollInterval() * 1100); // Reducing this number could reduce the poll time.
 
         while (imu->IMURead()) {
             mutex.lock();
